@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fullstackthanh.fullstackbackend.model.User;
 import com.fullstackthanh.fullstackbackend.repository.UserRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
