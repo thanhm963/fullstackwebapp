@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -42,4 +44,15 @@ public class UserController {
                 .orElseThrow(()->new UserNotFoundException(id));
     }
     
+    @PutMapping("/user/{id}")
+    User updateUser(@RequestBody User newUser, @PathVariable Long id){
+        return userRepository.findById(id)
+                .map(user ->{
+                     user.setUsername(newUser.getUsername());
+                     user.setName(newUser.getName());
+                     user.setEmail(newUser.getEmail());
+                     return userRepository.save(user);
+                }).orElseThrow(() -> new UserNotFoundException(id));
+        
+    }
 }
