@@ -15,6 +15,7 @@ import com.fullstackthanh.fullstackbackend.model.User;
 import com.fullstackthanh.fullstackbackend.repository.UserRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,5 +55,13 @@ public class UserController {
                      return userRepository.save(user);
                 }).orElseThrow(() -> new UserNotFoundException(id));
         
+    }
+    @DeleteMapping("/user/{id}")
+    String deleteUser(@PathVariable Long id){
+        if(!userRepository.existsById(id)){
+            throw new UserNotFoundException(id);
+        }
+        userRepository.deleteById(id);
+        return "User with id "+id+" has been deleted success ";
     }
 }
