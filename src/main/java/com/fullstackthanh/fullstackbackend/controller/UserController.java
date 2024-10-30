@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @CrossOrigin("http://localhost:3000")
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @PostMapping("/user")
     User newUser(@RequestBody User newUser){
@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping("/users")
     List<User> getAllUsers(){
-        return userRepository.findAll();
+        return userRepository.findAll();            //phuong findAll cua JpaRepository
     }
     
     @GetMapping("/user/{id}")
